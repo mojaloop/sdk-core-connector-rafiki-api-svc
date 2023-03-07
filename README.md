@@ -1,4 +1,4 @@
-# [EXPERIMENTAL] FX Converter Template
+# [EXPERIMENTAL] Rafiki Core Connector
 
 <!-- ACTION: REPLACE sdk-core-connector-rafiki-api-svc placeholders in this document -->
 [![Git Commit](https://img.shields.io/github/last-commit/mojaloop/sdk-core-connector-rafiki-api-svc.svg?style=flat)](https://github.com/mojaloop/sdk-core-connector-rafiki-api-svc/commits/master)
