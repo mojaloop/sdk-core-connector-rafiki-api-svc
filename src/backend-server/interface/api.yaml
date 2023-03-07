@@ -34,7 +34,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/WebHookIncomingPaymentRequest'
+              $ref: '#/components/schemas/RafikiWebHookIncomingPaymentRequest'
       responses:
         200:
           $ref: "#/components/responses/200"
@@ -53,7 +53,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/WebHookOutgoingPaymentRequest'
+              $ref: '#/components/schemas/RafikiWebHookOutgoingPaymentRequest'
       responses:
         200:
           $ref: "#/components/responses/200"
@@ -298,8 +298,8 @@ components:
         - description
         - createdAt
         - updatedAt
-    WebHookIncomingPaymentRequest:
-      title: WebHookIncomingPaymentRequest
+    RafikiWebHookIncomingPaymentRequest:
+      title: RafikiWebHookIncomingPaymentRequest
       type: object
       description: >-
         Rafiki itself does not hold any balances but needs to be funded for outgoing transfers and moneyneeds to be withdrawn for incoming transfers. In order to notify the Account Servicing Entity about those transfer events, they need to expose a webhook endpoint that listens for these events and reacts accordingly. (Refer https://github.com/interledger/rafiki/blob/main/docs/integration.md#webhook-events)
@@ -338,8 +338,8 @@ components:
                 expiresAt:
                   $ref: '#/components/schemas/DateTime'
   
-    WebHookIncomingPaymentCallback:
-      title: WebHookIncomingPaymentCallback
+    RafikiWebHookIncomingPaymentCallback:
+      title: RafikiWebHookIncomingPaymentCallback
       type: object
       description: >-
         Rafiki itself does not hold any balances but needs to be funded for outgoing transfers and moneyneeds to be withdrawn for incoming transfers. In order to notify the Account Servicing Entity about those transfer events, they need to expose a webhook endpoint that listens for these events and reacts accordingly. (Refer https://github.com/interledger/rafiki/blob/main/docs/integration.md#webhook-events)
@@ -375,8 +375,8 @@ components:
             createdAt:
               $ref: '#/components/schemas/DateTime'
               
-    WebHookOutgoingPaymentRequest:
-      title: WebHookOutgoingPaymentRequest
+    RafikiWebHookOutgoingPaymentRequest:
+      title: RafikiWebHookOutgoingPaymentRequest
       type: object
       description: >-
         Rafiki itself does not hold any balances but needs to be funded for outgoing transfers and moneyneeds to be withdrawn for incoming transfers. In order to notify the Account Servicing Entity about those transfer events, they need to expose a webhook endpoint that listens for these events and reacts accordingly. (Refer https://github.com/interledger/rafiki/blob/main/docs/integration.md#webhook-events)
