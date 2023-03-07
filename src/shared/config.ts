@@ -31,6 +31,11 @@ export interface ServiceConfig {
   }
   shared: {
     thirdpartySdkEndpoint: string
+  },
+  redis: {
+    host: string
+    port: number
+    timeout: number
   }
 }
 
@@ -138,7 +143,27 @@ export const ConvictConfig = Convict<ServiceConfig>({
       default: 'localhost:4040',
       env: 'THIRDPARTY_SDK_ENDPOINT'
     }
-  }
+  },
+  redis: {
+    host: {
+      doc: 'The Redis Hostname/IP address to connect.',
+      format: '*',
+      default: 'localhost',
+      env: 'REDIS_HOST'
+    },
+    port: {
+      doc: 'The Redis port to connect.',
+      format: 'port',
+      default: 6379,
+      env: 'REDIS_LISTEN_PORT'
+    },
+    timeout: {
+      doc: 'The Redis connection timeout',
+      format: 'nat',
+      default: 100,
+      env: 'REDIS_TIMEOUT'
+    }
+  },
 })
 
 // Load environment dependent configuration
@@ -158,6 +183,7 @@ const config: ServiceConfig = {
   requestProcessingTimeoutSeconds: ConvictConfig.get('requestProcessingTimeoutSeconds'),
   inspect: ConvictConfig.get('inspect'),
   shared: ConvictConfig.get('shared'),
+  redis: ConvictConfig.get('redis'),
 }
 
 export default config

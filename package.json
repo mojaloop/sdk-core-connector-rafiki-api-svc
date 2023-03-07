@@ -62,6 +62,7 @@
   "dependencies": {
     "@hapi/hapi": "^21.3.0",
     "@hapi/vision": "^7.0.1",
+    "@mojaloop/api-snippets": "^17.0.3",
     "@mojaloop/central-services-error-handling": "^12.0.5",
     "@mojaloop/central-services-shared": "^17.5.1",
     "@mojaloop/ml-number": "^11.2.1",
@@ -70,6 +71,7 @@
     "convict": "^6.2.4",
     "joi": "^17.8.3",
     "openapi-backend": "^5.6.2",
+    "redis": "3.1.2",
     "tslib": "^2.5.0"
   },
   "devDependencies": {
@@ -80,6 +82,7 @@
     "@types/hapi__vision": "^5.5.4",
     "@types/jest": "^29.4.0",
     "@types/node": "^18.14.5",
+    "@types/redis": "2.8.32",
     "@typescript-eslint/eslint-plugin": "5.54.0",
     "@typescript-eslint/parser": "5.54.0",
     "eslint": "8.35.0",
@@ -90,6 +93,7 @@
     "nodemon": "^2.0.21",
     "npm-audit-resolver": "3.0.0-7",
     "npm-check-updates": "16.7.10",
+    "openapi-typescript": "^6.1.1",
     "prettier": "2.8.4",
     "replace": "^1.2.2",
     "source-map-support": "0.5.21",
