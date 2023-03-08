@@ -54,7 +54,7 @@ export const ConvictConfig = Convict<ServiceConfig>({
     port: {
       doc: 'The port to bind.',
       format: 'port',
-      default: 4001,
+      default: 3000,
       env: 'BACKEND_SERVER_PORT'
     },
     corsWhiteList: {
