@@ -28,3 +28,16 @@ export class GspTransformer {
   //   return randomUUID()
   // }
 }
+
+export class IlpTransformer {
+
+  static toAmountFromILPtoFspiop = (value: number, assetScale: number) => {
+    const calculatedAmount = value / Math.pow(10, assetScale)
+    return calculatedAmount
+  }
+ 
+  // static toUUID(associationId: string): string {
+  //   // TODO: Implement conversion
+  //   return randomUUID()
+  // }
+}

@@ -1,0 +1,101 @@
+{
+  "test_cases": [
+    {
+      "id": 1,
+      "name": "Open Payments - Incoming Payments",
+      "requests": [
+        {
+          "id": 1,
+          "description": "Incoming Payments",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "rafiki_core_connector",
+            "asynchronous": false,
+            "specFile": "spec_files/api_definitions/rafiki_core_connector_0.1/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/rafiki_core_connector_0.1/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/rafiki_core_connector_0.1/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/rafiki_core_connector_0.1/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/rafiki_core_connector_0.1/trigger_templates"
+          },
+          "operationPath": "/open-payments/{ID}/{Type}/incoming-payments",
+          "path": "/open-payments/{$inputs.MSISDN_1}/MSISDN/incoming-payments",
+          "method": "post",
+          "params": {
+            "Type": "MSISDN",
+            "ID": "{$inputs.MSISDN_1}"
+          },
+          "url": "{$inputs.BACKEND_ENDPOINT}",
+          "body": {
+            "incomingAmount": {
+              "value": 1000,
+              "assetCode": "USD",
+              "assetScale": 2
+            },
+            "expiresAt": "2026-05-24T08:38:08.699-04:00",
+            "description": "Test",
+            "externalRef": "http://some-callback-url-here"
+          },
+          "queryParams": {}
+        }
+      ],
+      "fileInfo": {
+        "path": "happy_path/incoming-payments.json"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Rafiki - Webhook - Incoming Payments Completed",
+      "requests": [
+        {
+          "id": 1,
+          "description": "Incoming Payments Completed Event",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "rafiki_core_connector",
+            "asynchronous": false,
+            "specFile": "spec_files/api_definitions/rafiki_core_connector_0.1/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/rafiki_core_connector_0.1/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/rafiki_core_connector_0.1/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/rafiki_core_connector_0.1/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/rafiki_core_connector_0.1/trigger_templates"
+          },
+          "operationPath": "/rafiki/webhook/incoming-payment",
+          "path": "/rafiki/webhook/incoming-payment",
+          "method": "post",
+          "url": "{$inputs.BACKEND_ENDPOINT}",
+          "body": {
+            "id": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+            "type": "IncomingPaymentCompleted",
+            "data": {
+              "incomingPayment": {
+                "id": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+                "paymentPointerId": "string",
+                "description": "string",
+                "incomingAmount": {
+                  "value": 0,
+                  "assetCode": "AED",
+                  "assetScale": 0
+                },
+                "receivedAmount": {
+                  "value": 0,
+                  "assetCode": "AED",
+                  "assetScale": 0
+                },
+                "completed": true,
+                "externalRef": "string",
+                "createdAt": "2016-05-24T08:38:08.699-04:00",
+                "updatedAt": "2016-05-24T08:38:08.699-04:00",
+                "expiresAt": "2016-05-24T08:38:08.699-04:00"
+              }
+            }
+          }
+        }
+      ],
+      "fileInfo": {
+        "path": "happy_path/incoming-payments.json"
+      }
+    }
+  ]
+}

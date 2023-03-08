@@ -5,20 +5,31 @@ networks:
 
 services:
 
-  sdk-core-connector-rafiki-api-svc:
-    image: mojaloop/sdk-core-connector-rafiki-api-svc:local
-    build:
-      context: ../..
-    networks:
-        - mojaloop-net
-    environment:
-      - ENDPOINTS_SDK_URL=http://ttksim:4040/sdk-out
+  redis:
+    image: "redis:5.0.4-alpine"
+    cap_add:
+      - NET_ADMIN
     ports:
-      - "4001:4001"
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD" ,"sh", "-c", "redis-cli","ping"]
+      timeout: 20s
+      retries: 10
+      start_period: 40s
+      interval: 30s
+
+  # sdk-core-connector-rafiki-api-svc:
+  #   image: mojaloop/sdk-core-connector-rafiki-api-svc:local
+  #   build:
+  #     context: ../..
+  #   environment:
+  #     - ENDPOINTS_SDK_URL=http://ttksim:4040/sdk-out
+  #   ports:
+  #     - "4001:4001"
+  #   depends_on:
+  #     - redis
 
   ttksim:
-    networks:
-        - mojaloop-net
     image: mojaloop/ml-testing-toolkit:v15.6.3
     # image: mojaloop/ml-testing-toolkit:v16.1.0-snapshot.3
     user: root
@@ -41,8 +52,6 @@ services:
     image: mojaloop/ml-testing-toolkit-ui:v15.1.1
     ports:
       - "6060:6060"
-    networks:
-      - mojaloop-net
     environment:
       - API_BASE_URL=http://localhost:5050
       - AUTH_ENABLED=FALSE
@@ -52,3 +61,26 @@ services:
     profiles:
       - debug
 
+  redisinsight:
+    image: redislabs/redisinsight
+    ports:
+      - "9001:8001"
+    volumes: []
+    restart: on-failure
+    healthcheck:
+      test: ["CMD" ,"sh", "-c", "curl http://localhost:8001/api/instance/"]
+      timeout: 20s
+      retries: 30
+      start_period: 5s
+      interval: 5s
+    profiles:
+      - debug
+
+  init-redisinsight:
+    image: curlimages/curl:7.86.0
+    depends_on:
+      redisinsight:
+        condition: service_healthy
+    command: "--location --request POST 'http://redisinsight:8001/api/instance/' --header 'Content-Type: application/json' --data-raw '{\"name\": \"Redis DB\",\"connectionType\": \"STANDALONE\",\"host\": \"redis\",\"port\": 6379}'"
+    profiles:
+      - debug

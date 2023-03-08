@@ -29,9 +29,6 @@ export interface ServiceConfig {
     showHidden: boolean
     color: boolean
   }
-  shared: {
-    thirdpartySdkEndpoint: string
-  },
   redis: {
     host: string
     port: number
@@ -136,14 +133,6 @@ export const ConvictConfig = Convict<ServiceConfig>({
       default: true
     }
   },
-  shared: {
-    thirdpartySdkEndpoint: {
-      doc: 'Peer/Switch endpoint',
-      format: '*',
-      default: 'localhost:4040',
-      env: 'THIRDPARTY_SDK_ENDPOINT'
-    }
-  },
   redis: {
     host: {
       doc: 'The Redis Hostname/IP address to connect.',
@@ -182,7 +171,6 @@ const config: ServiceConfig = {
   endpoints: ConvictConfig.get('endpoints'),
   requestProcessingTimeoutSeconds: ConvictConfig.get('requestProcessingTimeoutSeconds'),
   inspect: ConvictConfig.get('inspect'),
-  shared: ConvictConfig.get('shared'),
   redis: ConvictConfig.get('redis'),
 }
 

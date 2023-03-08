@@ -13,12 +13,17 @@
           "id": 1,
           "description": "Get Health of Backend Service",
           "apiVersion": {
-            "minorVersion": 1,
-            "majorVersion": 0,
-            "type": "rafiki_core_connector",
-            "asynchronous": false,
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "scheme_adapter_outbound",
+            "asynchronous": true,
             "prefix": "/sdk-out",
-            "hostnames": []
+            "hostnames": [],
+            "specFile": "spec_files/api_definitions/mojaloop_sdk_outbound_scheme_adapter_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/mojaloop_sdk_outbound_scheme_adapter_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/mojaloop_sdk_outbound_scheme_adapter_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/mojaloop_sdk_outbound_scheme_adapter_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/mojaloop_sdk_outbound_scheme_adapter_1.0/trigger_templates"
           },
           "operationPath": "/",
           "path": "/",

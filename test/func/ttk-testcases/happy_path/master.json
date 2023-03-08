@@ -3,6 +3,10 @@
     {
       "name": "health.json",
       "type": "file"
+    },
+    {
+      "name": "incoming-payments.json",
+      "type": "file"
     }
   ]
 }
