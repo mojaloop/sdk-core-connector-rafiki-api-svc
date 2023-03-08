@@ -6,6 +6,8 @@ networks:
 services:
 
   redis:
+    networks:
+        - mojaloop-net
     image: "redis:5.0.4-alpine"
     cap_add:
       - NET_ADMIN
@@ -19,6 +21,8 @@ services:
       interval: 30s
 
   sdk-core-connector-rafiki-api-svc:
+    networks:
+        - mojaloop-net
     image: mojaloop/sdk-core-connector-rafiki-api-svc:local
     build:
       context: ../..
@@ -32,6 +36,8 @@ services:
       - redis
 
   ttksim:
+    networks:
+        - mojaloop-net
     image: mojaloop/ml-testing-toolkit:v15.6.3
     # image: mojaloop/ml-testing-toolkit:v16.1.0-snapshot.3
     user: root
@@ -51,6 +57,8 @@ services:
       retries: 3
 
   ttksimui:
+    networks:
+        - mojaloop-net
     image: mojaloop/ml-testing-toolkit-ui:v15.1.1
     ports:
       - "6060:6060"
@@ -64,6 +72,8 @@ services:
       - debug
 
   redisinsight:
+    networks:
+        - mojaloop-net
     image: redislabs/redisinsight
     ports:
       - "9001:8001"
@@ -79,6 +89,8 @@ services:
       - debug
 
   init-redisinsight:
+    networks:
+        - mojaloop-net
     image: curlimages/curl:7.86.0
     depends_on:
       redisinsight:
