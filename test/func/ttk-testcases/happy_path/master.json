@@ -7,6 +7,10 @@
     {
       "name": "incoming-payments.json",
       "type": "file"
+    },
+    {
+      "name": "e2e_transfer.json",
+      "type": "file"
     }
   ]
 }

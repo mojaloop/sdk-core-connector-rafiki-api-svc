@@ -36,11 +36,29 @@
             "description": "Test",
             "externalRef": "http://some-callback-url-here"
           },
-          "queryParams": {}
+          "queryParams": {},
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Status code is 200",
+                "exec": [
+                  "expect(response.status).equals(200)"
+                ]
+              },
+              {
+                "id": 2,
+                "description": "Status in the body is OK",
+                "exec": [
+                  "expect(response.body.incomingAmount.value).not.equals(0)"
+                ]
+              }
+            ]
+          }
         }
       ],
       "fileInfo": {
-        "path": "happy_path/incoming-payments.json"
+        "path": "ttk-testcases/happy_path/incoming-payments.json"
       }
     },
     {
@@ -90,11 +108,22 @@
                 "expiresAt": "2016-05-24T08:38:08.699-04:00"
               }
             }
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Status code is 200",
+                "exec": [
+                  "expect(response.status).equals(200)"
+                ]
+              }
+            ]
           }
         }
       ],
       "fileInfo": {
-        "path": "happy_path/incoming-payments.json"
+        "path": "ttk-testcases/happy_path/incoming-payments.json"
       }
     }
   ]

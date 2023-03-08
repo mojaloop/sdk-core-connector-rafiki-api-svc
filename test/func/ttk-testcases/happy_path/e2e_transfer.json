@@ -36,7 +36,25 @@
             "description": "Test",
             "externalRef": "http://localhost:4040/incoming-webhook"
           },
-          "queryParams": {}
+          "queryParams": {},
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Status code is 200",
+                "exec": [
+                  "expect(response.status).equals(200)"
+                ]
+              },
+              {
+                "id": 2,
+                "description": "Status in the body is OK",
+                "exec": [
+                  "expect(response.body.incomingAmount.value).not.equals(0)"
+                ]
+              }
+            ]
+          }
         },
         {
           "id": 2,
@@ -81,6 +99,17 @@
                 "expiresAt": "2016-05-24T08:38:08.699-04:00"
               }
             }
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Status code is 200",
+                "exec": [
+                  "expect(response.status).equals(200)"
+                ]
+              }
+            ]
           }
         }
       ],

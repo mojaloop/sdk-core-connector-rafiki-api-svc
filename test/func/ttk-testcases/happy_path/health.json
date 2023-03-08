@@ -6,7 +6,7 @@
       "id": 1,
       "name": "Check Health Endpoint",
       "fileInfo": {
-        "path": "happy_path/health.json"
+        "path": "ttk-testcases/happy_path/health.json"
       },
       "requests": [
         {

@@ -18,16 +18,18 @@ services:
       start_period: 40s
       interval: 30s
 
-  # sdk-core-connector-rafiki-api-svc:
-  #   image: mojaloop/sdk-core-connector-rafiki-api-svc:local
-  #   build:
-  #     context: ../..
-  #   environment:
-  #     - ENDPOINTS_SDK_URL=http://ttksim:4040/sdk-out
-  #   ports:
-  #     - "4001:4001"
-  #   depends_on:
-  #     - redis
+  sdk-core-connector-rafiki-api-svc:
+    image: mojaloop/sdk-core-connector-rafiki-api-svc:local
+    build:
+      context: ../..
+    environment:
+      - ENDPOINTS_SDK_URL=http://ttksim:4040/sdk-out
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    ports:
+      - "4001:4001"
+    depends_on:
+      - redis
 
   ttksim:
     image: mojaloop/ml-testing-toolkit:v15.6.3

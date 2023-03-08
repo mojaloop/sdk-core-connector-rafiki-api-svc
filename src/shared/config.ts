@@ -144,7 +144,7 @@ export const ConvictConfig = Convict<ServiceConfig>({
       doc: 'The Redis port to connect.',
       format: 'port',
       default: 6379,
-      env: 'REDIS_LISTEN_PORT'
+      env: 'REDIS_PORT'
     },
     timeout: {
       doc: 'The Redis connection timeout',
