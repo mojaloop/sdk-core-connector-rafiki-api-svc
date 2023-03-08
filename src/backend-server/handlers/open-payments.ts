@@ -48,7 +48,8 @@ async function IdTypeIncomingPaymentsPost(_context: unknown, _request: Request, 
 
     // Construct the response payload of open-payments based on `data` here
     const descriptionObject = {
-      name: data.to.displayName
+      // name: data.to.displayName
+      name: data.getPartiesResponse.body.name
     }
     const incomingAmount = IlpTransformer.toAmountFromFspiopToILP(data.quoteResponse.body.transferAmount.amount, data.quoteResponse.body.transferAmount.currency)
     const curDate = (new Date()).toISOString()

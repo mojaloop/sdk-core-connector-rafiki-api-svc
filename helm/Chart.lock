@@ -1,0 +1,6 @@
+dependencies:
+- name: common
+  repository: https://docs.mojaloop.io/charts/repo
+  version: 2.0.0
+digest: sha256:af5c8e2ba722420cf94ef5d5d9e374b83fe014d52143ee1ac34b61624e9612f9
+generated: "2023-03-08T23:55:40.266976+05:30"
