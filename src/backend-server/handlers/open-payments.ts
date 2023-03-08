@@ -14,7 +14,6 @@ async function IdTypeIncomingPaymentsPost(_context: unknown, _request: Request, 
     const reqBody = JSON.parse(JSON.stringify(_request.payload))
     const amount = IlpTransformer.toAmountFromILPtoFspiop(reqBody.incomingAmount.value, reqBody.incomingAmount.assetScale) + ''
     const currency = reqBody.incomingAmount.assetCode
-    console.log(_request)
     const toIdType = _request.params.Type
     const toIdValue = _request.params.ID
     // TODO: payer details are hardcoded. Need to fix that.
@@ -51,22 +50,21 @@ async function IdTypeIncomingPaymentsPost(_context: unknown, _request: Request, 
     const descriptionObject = {
       name: data.to.displayName
     }
+    const incomingAmount = IlpTransformer.toAmountFromFspiopToILP(data.quoteResponse.body.transferAmount.amount, data.quoteResponse.body.transferAmount.currency)
+    const curDate = (new Date()).toISOString()
     const responseOut = {
       id: data.transferId,
       paymentPointer: "$Pch.Cnp",
       completed: false,
-      incomingAmount: {
-        ...reqBody.incomingAmount,
-        value: data.quoteResponse.body.transferAmount.amount
-      },
+      incomingAmount,
       receivedAmount: {
         value: 0,
         assetCode: currency,
         assetScale: 0
       },
       description: JSON.stringify(descriptionObject),
-      createdAt: "2016-05-24T08:38:08.699-04:00",
-      updatedAt: "2016-05-24T08:38:08.699-04:00"
+      createdAt: curDate,
+      updatedAt: curDate
     }
 
     // Save external ref callback url for later callback

@@ -24,6 +24,7 @@ export const StatePlugin = {
       logger
     }
     const kvs = new KVS(connection)
+    await Promise.all([kvs.connect()])
 
     try {
       // prepare toolkit accessors

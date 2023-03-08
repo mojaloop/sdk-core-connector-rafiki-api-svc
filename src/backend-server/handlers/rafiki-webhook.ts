@@ -13,6 +13,7 @@ async function WebHookIncomingPaymentEvent(_context: unknown, _request: Request,
         // TODO: optimize the following deep copy function
         const reqBody = JSON.parse(JSON.stringify(_request.payload))
     
+        // Assuming the id is direct SDK transfer ID. If it should be in some other format, we may need to parse it here
         const sdkTransferId = reqBody.data.incomingPayment.id
         const destUrl = h.context.serviceConfig.endpoints.sdkUrl + '/transfers/' + sdkTransferId
     
@@ -37,31 +38,40 @@ async function WebHookIncomingPaymentEvent(_context: unknown, _request: Request,
         if (data.currentState === 'COMPLETED') {
           transferStatus = 'COMPLETED'
         }
+        const receiveAmount = IlpTransformer.toAmountFromFspiopToILP(data.quoteResponse.body.payeeReceiveAmount.amount, data.quoteResponse.body.payeeReceiveAmount.currency)
+        const curDate = (new Date()).toISOString()
         const callbackReqBody = {
-          id: "b51ec534-ee48-4575-b6a9-ead2955b8069",
+          id: sdkTransferId,
           type: "OutgoingPaymentCreated",
           data: {
             payment: {
-              id: reqBody.data.incomingPayment.id,
+              id: sdkTransferId,
               paymentPointerId: reqBody.data.incomingPayment.paymentPointerId,
               description: reqBody.data.incomingPayment.description,
               receiver: "string",
               sendAmount: reqBody.data.incomingPayment.incomingAmount,
-              receiveAmount: {
-                value: data.quoteResponse.body.payeeReceiveAmount.amount,
-                assetCode: data.quoteResponse.body.payeeReceiveAmount.currency,
-                assetScale: 0
-              },
+              receiveAmount,
               completed: true,
               externalRef: "string",
               status: transferStatus,
-              createdAt: "2016-05-24T08:38:08.699-04:00",
-              updatedAt: "2016-05-24T08:38:08.699-04:00"
+              createdAt: curDate,
+              updatedAt: curDate
             }
           }
         }
+        const callbackReqHeaders = {}
         // TODO: Need to send a http call here
-        console.log(callbackReqBody)
+        const kvs = h.getKVS();
+        const callbackUrl = (await kvs.get(sdkTransferId)) as string
+        const callbackResponseObj = await axios.post(
+          callbackUrl,
+          callbackReqBody,
+          {
+            headers: callbackReqHeaders,
+          },
+        )
+        console.log(JSON.stringify(callbackReqBody, null, 4))
+        console.log(JSON.stringify(callbackResponseObj, null, 4))
       } catch (error) {
         // TODO: What to do incase of error. Do we need to make an error callback?
         if (axios.isAxiosError(error)) {

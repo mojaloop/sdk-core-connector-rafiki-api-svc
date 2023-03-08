@@ -1,6 +1,7 @@
 
 // import { randomUUID } from "crypto";
 import MLNumber from '@mojaloop/ml-number'
+import currencyCodes from 'currency-codes'
 
 export class GspTransformer {
 
@@ -34,6 +35,17 @@ export class IlpTransformer {
   static toAmountFromILPtoFspiop = (value: number, assetScale: number) => {
     const calculatedAmount = value / Math.pow(10, assetScale)
     return calculatedAmount
+  }
+
+  static toAmountFromFspiopToILP = (amount: number, currency: string) => {
+    const currencyObj = currencyCodes.code(currency)
+    const assetScale = currencyObj?.digits || 0
+    const calculatedValue = amount * Math.pow(10, assetScale)
+    return {
+      value: calculatedValue,
+      assetCode: currency,
+      assetScale
+    }
   }
  
   // static toUUID(associationId: string): string {
