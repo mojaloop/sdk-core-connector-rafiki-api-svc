@@ -16,7 +16,7 @@ async function IdTypeIncomingPaymentsPost(_context: unknown, _request: Request, 
     const headersOut = {
 
     }
-    
+
     const { data, status } = await axios.post(
       destUrl,
       requestOut,
@@ -29,6 +29,11 @@ async function IdTypeIncomingPaymentsPost(_context: unknown, _request: Request, 
     const responseOut = {
 
     }
+
+    // Save external ref callback url for later callback
+    // Maybe the whole request
+    // const kvs = h.getKVS();
+    // await kvs.set(transferId, request.externalRef)
     return h.response(responseOut).code(status)
   } catch (error) {
     if (axios.isAxiosError(error)) {
