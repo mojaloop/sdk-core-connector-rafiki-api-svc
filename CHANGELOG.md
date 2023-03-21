@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.5](https://github.com/mojaloop/sdk-core-connector-rafiki-api-svc/compare/v0.1.4...v0.1.5) (2023-03-08)
+
+
+### Features
+
+* port changed ([6b33314](https://github.com/mojaloop/sdk-core-connector-rafiki-api-svc/commit/6b333140a84f4d0be6c0317f62a079918b3a3660))
+
+
+### Bug Fixes
+
+* description ([aedf379](https://github.com/mojaloop/sdk-core-connector-rafiki-api-svc/commit/aedf379e2b79bd3f6721341a78f4dcc444a98e34))
+
 ### 0.1.4 (2023-03-08)
 
 
