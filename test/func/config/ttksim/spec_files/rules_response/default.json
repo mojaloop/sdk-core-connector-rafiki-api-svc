@@ -69,7 +69,7 @@
           "transactionType": "{$request.body.transactionType}",
           "subScenario": null,
           "note": "{$request.body.note}",
-          "currentState": "COMPLETED",
+          "currentState": "WAITING_FOR_QUOTE_ACCEPTANCE",
           "quoteId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
           "getPartiesResponse": {
             "body": {},

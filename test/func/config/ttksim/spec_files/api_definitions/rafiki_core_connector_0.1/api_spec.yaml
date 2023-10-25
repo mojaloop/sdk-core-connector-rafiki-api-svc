@@ -17,7 +17,7 @@ paths:
           description: >-
             Returns empty body if the scheme adapter outbound transfers service
             is running.
-  /open-payments/{ID}/{Type}/incoming-payments:
+  /open-payments/{Type}/{ID}/incoming-payments:
     post:
       summary: ''
       description: ''
